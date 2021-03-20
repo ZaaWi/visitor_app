@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:visitor_app/models/event_model.dart';
+import 'package:visitor_app/providers/user_provider.dart';
 import 'package:visitor_app/screens/components/animations/fade_animation.dart';
 import 'package:visitor_app/screens/components/events/list_item.dart';
-
-
-
-
-
-
 
 class WishlistCardList extends StatefulWidget {
   @override
@@ -17,14 +13,14 @@ class WishlistCardList extends StatefulWidget {
 }
 
 class _WishlistCardListState extends State<WishlistCardList> {
-
-  final String query = r"""
+  final String wishlistQuery = r"""
   
   
   
- query search ($title: String!) {
-  events(where: {title_contains: $title}) {
-    id
+ query  wishlist ($id: Int) {
+  users (where: {id: $id})  {
+    wishlist {
+      id
     title
     city {
       name
@@ -37,7 +33,7 @@ class _WishlistCardListState extends State<WishlistCardList> {
     image {
       formats:url
     }
-    
+    }
   }
 }
 
@@ -45,8 +41,6 @@ class _WishlistCardListState extends State<WishlistCardList> {
 
 
                   """;
-
-
 
   Widget getEventItems(List<Event> evs) {
     //TODO: refactor and redesign for real data, duplicated widget
@@ -71,20 +65,16 @@ class _WishlistCardListState extends State<WishlistCardList> {
     );
   }
 
-
-
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
+    print(Provider.of<UserProvider>(context).user.id);
     return Query(
-      options: QueryOptions(document: gql(query), variables: {
-        'title': '',
-      }),
+      options: QueryOptions(
+        document: gql(wishlistQuery),
+        variables: {
+          'id': Provider.of<UserProvider>(context).user.id,
+        },
+      ),
       builder: (QueryResult result,
           {VoidCallback refetch, FetchMore fetchMore}) {
         if (result.isLoading) {
@@ -104,7 +94,8 @@ class _WishlistCardListState extends State<WishlistCardList> {
           );
         }
         List<Event> eventList = [];
-        for (var e in result.data['events']) {
+
+        for (var e in result.data['users'][0]['wishlist']) {
           Event event = Event(
             title: e['title'],
             description: e['description'],
@@ -112,6 +103,7 @@ class _WishlistCardListState extends State<WishlistCardList> {
             img: e['image'][0]['formats'],
           );
           eventList.add(event);
+          print(event.title);
         }
 
         return Column(

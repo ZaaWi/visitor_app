@@ -38,16 +38,24 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
 
   final String query = r"""
-                  mutation {
+                 mutation {
   login(input: { identifier: "user1", password: "User123" }) {
     jwt
     user {
       username
+      id
       email
+      role {
+        id
+      }
+      
+      
+      
       
     }
   }
 }
+
 
                   """;
 
@@ -82,8 +90,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
           print(result.data);
           print('jwt');
           print(result.data['login']['jwt']);
+          print(result.data['login']['user']['username']);
+          print(result.data['login']['user']['id']);
+          int i = int.parse(result.data['login']['user']['id']);
           Provider.of<UserProvider>(context).setUserData(
             token: result.data['login']['jwt'],
+            id: i,
+            userName: result.data['login']['user']['username'],
           );
 
 
