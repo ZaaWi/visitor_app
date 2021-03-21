@@ -1,22 +1,22 @@
-
 import 'package:flutter/material.dart';
 import 'package:visitor_app/api/api_config.dart';
 import 'package:visitor_app/models/event_model.dart';
+import 'package:visitor_app/screens/app_screen.dart';
+import 'package:visitor_app/screens/event_screen.dart';
 
 Widget ListItem({Event event, BuildContext context}) {
   return FlatButton(
-    // onPressed: () {
-    //   //TODO: show event details goes here,
-    //   showModalBottomSheet(
-    //     isScrollControlled: true,
-    //     backgroundColor: Colors.transparent,
-    //     context: context,
-    //     // builder: (context) => TicketWidget(),
-    //     builder: (context) => EventScreen(
-    //       product: products[0],
-    //     ),
-    //   );
-    // },
+    onPressed: () {
+
+      showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) => EventScreen(
+          event: event,
+        ),
+      );
+    },
     child: Row(
       children: <Widget>[
         Container(
@@ -45,8 +45,9 @@ Widget ListItem({Event event, BuildContext context}) {
             height: 200,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(image: NetworkImage('$apiUrl${event.img}'),
-                    fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: NetworkImage('$apiUrl${event.img}'),
+                  fit: BoxFit.cover),
               // image: Image.network(event.img),
             ),
             child: Container(
@@ -82,9 +83,10 @@ Widget ListItem({Event event, BuildContext context}) {
                       ),
                       Text(
                         event.getTime(event.dateTime).toString(),
-                        style: TextStyle(color: Colors.white,),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
-
                     ],
                   )
                 ],

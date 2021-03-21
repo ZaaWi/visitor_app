@@ -5,6 +5,7 @@ import 'api/api_config.dart';
 import 'constants/routes.dart';
 import 'providers/user_provider.dart';
 import 'screens/app_screen.dart';
+import 'screens/event_screen.dart';
 import 'screens/loading_screen.dart';
 import 'screens/login_screen.dart';
 
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
             kRouteLoginScreen: (context) => LoginScreen(),
             '/ok' : (context) => Container(child: Center(child: Text('ok'),),),
             kRouteLoadingScreen : (context) => LoadingScreen(),
+            kRouteEventScreen : (context) => EventScreen(),
+            '/app' : (context) => AppScreen(),
             //TODO: define all routes
           },
         ),

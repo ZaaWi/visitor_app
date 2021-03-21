@@ -8,6 +8,7 @@ class Event {
   String dateTime;
   List<String> tickets;
   String img;
+  String location;
 
   Event(
       {this.id,
@@ -15,38 +16,33 @@ class Event {
       this.description,
       this.dateTime,
       this.tickets,
-      this.img});
+      this.img,
+      this.location});
 
   String getTime(String data) {
-
     final date = DateTime.parse(data);
     final format = DateFormat('HH:MM a');
-     var datedata = format.format(date).toString();
+    var datedata = format.format(date).toString();
     print(datedata);
 
     return datedata;
-
   }
 
   String getDay(String data) {
-
     final date = DateTime.parse(data);
     final format = DateFormat('EEE');
     var datedata = format.format(date).toString();
     print(datedata);
 
     return datedata;
-
   }
 
   String getDate(String data) {
-
     final date = DateTime.parse(data);
     final format = DateFormat('MMM d');
     var datedata = format.format(date).toString();
     print(datedata);
 
     return datedata;
-
   }
 }

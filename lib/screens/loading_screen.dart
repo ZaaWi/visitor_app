@@ -27,12 +27,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
 
 
-  void homeRedirect () async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-
-      return AppScreen(
-      );
-    }));
+  void homeRedirect ()  {
+    // Navigator.pushReplacementNamed(context, '/app');
+    Navigator.popAndPushNamed(context, '/app');
   }
 
 
@@ -106,19 +103,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
           // print(widget.identifier);
           // print(widget.password);
-          homeRedirect();
+          // homeRedirect();
 
           // setState(() {
           //   Navigator.pushNamed(context, '/ok');
           // });
 
-          return Center(
-            child: SpinKitDoubleBounce(
-              duration: Duration(milliseconds: 100),
-              color: Colors.green[100],
-              size: 100,
-            ),
-          );
+          return AppScreen();
         },
       ),
     );
@@ -134,3 +125,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
 // size: 100,
 // ),
 // ),
+
+// Center(
+// child: SpinKitDoubleBounce(
+// duration: Duration(milliseconds: 100),
+// color: Colors.green[100],
+// size: 100,
+// ),
+// )

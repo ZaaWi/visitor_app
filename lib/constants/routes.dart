@@ -10,3 +10,4 @@ const String kRouteEvent = '/event';
 const String kRouteAccountScreen = '/account';
 const String kRouteRegisterScreen = '/register';
 const String kRouteLoadingScreen = '/loading';
+const String kRouteEventScreen = '/event';

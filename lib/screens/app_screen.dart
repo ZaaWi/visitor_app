@@ -4,8 +4,11 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:visitor_app/api/api_config.dart';
 import 'package:visitor_app/providers/user_provider.dart';
+import 'package:visitor_app/screens/event_screen.dart';
 
+import 'account_screen.dart';
 import 'home_screen.dart';
+import 'my_tickets_screen.dart';
 import 'wishlist_screen.dart';
 
 class AppScreen extends StatefulWidget {
@@ -38,12 +41,12 @@ class _AppScreenState extends State<AppScreen> {
     //my tickets screen
     if (index == 2) {
       // return Center(child: Text('my tickets'),);
-      return testWidget;
+      return MyTicketsScreen();
     }
     //account screen
     else
       // return Center(child: Text('Account'),);
-      return testWidget;
+      return AccountScreen();
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:visitor_app/models/event_model.dart';
 import 'package:visitor_app/providers/search_provider.dart';
 import 'package:visitor_app/screens/components/animations/fade_animation.dart';
 import 'package:visitor_app/screens/components/events/list_item.dart';
+import 'package:visitor_app/screens/event_screen.dart';
 
 class ItemsCardList extends StatefulWidget {
   @override
@@ -54,7 +55,10 @@ class _ItemsCardListState extends State<ItemsCardList> {
             ),
             FadeAnimation(
               1.2,
-              ListItem(context: context, event: e),
+              ListItem(
+                context: context,
+                event: e,
+              ),
             ),
           ],
         ),
